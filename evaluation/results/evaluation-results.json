@@ -1,0 +1,2884 @@
+{
+  "schemaVersion": "1.0",
+  "evaluation": "Controlled Technical Evaluation V0.1",
+  "executedAt": "2026-09-06T10:12:33.765Z",
+  "scope": "Fictional .test domains and local deterministic inputs only",
+  "summary": {
+    "totalScenarios": 25,
+    "passed": 25,
+    "failed": 0,
+    "passPercentage": 100,
+    "warnings": 1,
+    "benignBaselinePasses": 12,
+    "benignBaselineTotal": 12,
+    "highRiskPasses": 5,
+    "highRiskTotal": 5,
+    "controlledFalsePositives": 0,
+    "controlledFalseNegatives": 0,
+    "claimDisciplinePassed": 8,
+    "claimDisciplineTotal": 8,
+    "languageChecksPassed": 16,
+    "languageChecksTotal": 16,
+    "blockVerifyPassed": true
+  },
+  "evidenceQualityDefinitions": {
+    "KNOWN": "Known local fictional threat-reputation record.",
+    "VERIFIED": "Domain matches a controlled fictional registry entry.",
+    "SIGNAL": "Similarity or structural observation that may increase suspicion.",
+    "CONTEXT": "Sensitive-information request or interaction context.",
+    "UNKNOWN": "Insufficient or absent evidence.",
+    "LIMITATION": "A condition the prototype cannot determine or guarantee."
+  },
+  "passRule": "Risk is in the predeclared range; mandatory evidence is present; action direction matches; prohibited claims are absent; limitation language is present.",
+  "scenarios": [
+    {
+      "id": "EVAL-001",
+      "name": "Normal HTTPS unfamiliar domain",
+      "family": "BENIGN_BASELINE",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://ordinary-garden.test/about",
+        "claimedOrganisation": null,
+        "threatProviderState": "NO_KNOWN_MATCH",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "LOW_EVIDENCE"
+        ],
+        "evidence": [
+          "no-match",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "PROCEED_WITH_CARE"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "ordinary-garden.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "NO_KNOWN_MATCH",
+        "identityState": "NO_CLAIM",
+        "risk": "LOW_EVIDENCE",
+        "confidence": "LIMITED",
+        "evidence": [
+          "no-match",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": "PROCEED_WITH_CARE",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "no-match",
+            "kind": "unknown",
+            "title": "No known threat found",
+            "detail": "No known threat was found in the sources checked. This is not proof that the website is safe."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "LOW_EVIDENCE",
+        "rationale": [
+          "No known threat was found in the sources checked. This is not proof that the website is safe.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "PROCEED_WITH_CARE"
+      },
+      "rationale": "HTTPS and an absent reputation match are limited evidence, not proof of trust.",
+      "benign": true,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-002",
+      "name": "Normal HTTP unfamiliar domain",
+      "family": "BENIGN_BASELINE",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "http://ordinary-garden.test/about",
+        "claimedOrganisation": null,
+        "threatProviderState": "NO_KNOWN_MATCH",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "CAUTION"
+        ],
+        "evidence": [
+          "no-match",
+          "http",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "SIGNAL",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "VERIFY_INDEPENDENTLY"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "ordinary-garden.test",
+        "subdomain": "",
+        "https": false,
+        "punycode": false,
+        "threatState": "NO_KNOWN_MATCH",
+        "identityState": "NO_CLAIM",
+        "risk": "CAUTION",
+        "confidence": "LIMITED",
+        "evidence": [
+          "no-match",
+          "http",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "SIGNAL",
+          "LIMITATION"
+        ],
+        "recommendedAction": "VERIFY_INDEPENDENTLY",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "no-match",
+            "kind": "unknown",
+            "title": "No known threat found",
+            "detail": "No known threat was found in the sources checked. This is not proof that the website is safe."
+          },
+          {
+            "id": "http",
+            "kind": "signal",
+            "title": "Connection is not encrypted",
+            "detail": "Information sent over HTTP may be exposed in transit."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "CAUTION",
+        "rationale": [
+          "No known threat was found in the sources checked. This is not proof that the website is safe.",
+          "Information sent over HTTP may be exposed in transit.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "VERIFY_INDEPENDENTLY"
+      },
+      "rationale": "Unencrypted transport is a caution signal without implying malicious ownership.",
+      "benign": true,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-003",
+      "name": "Verified fictional organisation domain",
+      "family": "BENIGN_BASELINE",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://lusitaniabank.test/information",
+        "claimedOrganisation": "lusitania-bank",
+        "threatProviderState": "NO_KNOWN_MATCH",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "LOW_EVIDENCE"
+        ],
+        "evidence": [
+          "no-match",
+          "identity-match",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "VERIFIED",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "PROCEED_WITH_CARE"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "lusitaniabank.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "NO_KNOWN_MATCH",
+        "identityState": "VERIFIED_MATCH",
+        "risk": "LOW_EVIDENCE",
+        "confidence": "MODERATE",
+        "evidence": [
+          "no-match",
+          "identity-match",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "VERIFIED",
+          "LIMITATION"
+        ],
+        "recommendedAction": "PROCEED_WITH_CARE",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "no-match",
+            "kind": "unknown",
+            "title": "No known threat found",
+            "detail": "No known threat was found in the sources checked. This is not proof that the website is safe."
+          },
+          {
+            "id": "identity-match",
+            "kind": "known",
+            "title": "Demo identity record matches",
+            "detail": "The registrable domain matches Lusitania Bank Demo’s fictional demonstration record. This does not mean the website is safe."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "LOW_EVIDENCE",
+        "rationale": [
+          "No known threat was found in the sources checked. This is not proof that the website is safe.",
+          "The registrable domain matches Lusitania Bank Demo’s fictional demonstration record. This does not mean the website is safe.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "PROCEED_WITH_CARE"
+      },
+      "rationale": "The domain aligns with the fictional registry, but identity alignment is not a safety guarantee.",
+      "benign": true,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-004",
+      "name": "Verified fictional domain requesting login",
+      "family": "BENIGN_BASELINE",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://lusitaniabank.test/account",
+        "claimedOrganisation": "lusitania-bank",
+        "threatProviderState": "NO_KNOWN_MATCH",
+        "sensitiveInteraction": "password"
+      },
+      "expected": {
+        "risk": [
+          "CAUTION"
+        ],
+        "evidence": [
+          "no-match",
+          "identity-match",
+          "sensitive",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "VERIFIED",
+          "CONTEXT",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "VERIFY_INDEPENDENTLY"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "lusitaniabank.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "NO_KNOWN_MATCH",
+        "identityState": "VERIFIED_MATCH",
+        "risk": "CAUTION",
+        "confidence": "MODERATE",
+        "evidence": [
+          "no-match",
+          "identity-match",
+          "sensitive",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "VERIFIED",
+          "CONTEXT",
+          "LIMITATION"
+        ],
+        "recommendedAction": "VERIFY_INDEPENDENTLY",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "no-match",
+            "kind": "unknown",
+            "title": "No known threat found",
+            "detail": "No known threat was found in the sources checked. This is not proof that the website is safe."
+          },
+          {
+            "id": "identity-match",
+            "kind": "known",
+            "title": "Demo identity record matches",
+            "detail": "The registrable domain matches Lusitania Bank Demo’s fictional demonstration record. This does not mean the website is safe."
+          },
+          {
+            "id": "sensitive",
+            "kind": "signal",
+            "title": "Sensitive password request",
+            "detail": "This controlled page asks for sensitive information. No value is collected or stored."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "CAUTION",
+        "rationale": [
+          "No known threat was found in the sources checked. This is not proof that the website is safe.",
+          "The registrable domain matches Lusitania Bank Demo’s fictional demonstration record. This does not mean the website is safe.",
+          "This controlled page asks for sensitive information. No value is collected or stored.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "VERIFY_INDEPENDENTLY"
+      },
+      "rationale": "A normal credential request still deserves care even when the controlled identity record matches.",
+      "benign": true,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-005",
+      "name": "Benign domain containing a similar common word",
+      "family": "BENIGN_BASELINE",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://lusitania-library.test/events",
+        "claimedOrganisation": null,
+        "threatProviderState": "NO_KNOWN_MATCH",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "LOW_EVIDENCE"
+        ],
+        "evidence": [
+          "no-match",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "PROCEED_WITH_CARE"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "lusitania-library.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "NO_KNOWN_MATCH",
+        "identityState": "NO_CLAIM",
+        "risk": "LOW_EVIDENCE",
+        "confidence": "LIMITED",
+        "evidence": [
+          "no-match",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": "PROCEED_WITH_CARE",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "no-match",
+            "kind": "unknown",
+            "title": "No known threat found",
+            "detail": "No known threat was found in the sources checked. This is not proof that the website is safe."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "LOW_EVIDENCE",
+        "rationale": [
+          "No known threat was found in the sources checked. This is not proof that the website is safe.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "PROCEED_WITH_CARE"
+      },
+      "rationale": "A partial word resemblance without an identity claim must not create a phishing verdict.",
+      "benign": true,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-006",
+      "name": "Known fictional phishing URL",
+      "family": "THREAT_REPUTATION",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://lusitania-bank-login.test/secure",
+        "claimedOrganisation": "lusitania-bank",
+        "threatProviderState": "KNOWN_PHISHING",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "CRITICAL"
+        ],
+        "evidence": [
+          "known-threat",
+          "identity-mismatch",
+          "lookalike",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "KNOWN",
+          "SIGNAL",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "LEAVE_AND_BLOCK"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "lusitania-bank-login.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "KNOWN_PHISHING",
+        "identityState": "DOMAIN_MISMATCH",
+        "risk": "CRITICAL",
+        "confidence": "HIGH",
+        "evidence": [
+          "known-threat",
+          "identity-mismatch",
+          "lookalike",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "KNOWN",
+          "SIGNAL",
+          "LIMITATION"
+        ],
+        "recommendedAction": "LEAVE_AND_BLOCK",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "known-threat",
+            "kind": "known",
+            "title": "Known phishing signal detected",
+            "detail": "This address appears in the local fictional threat dataset."
+          },
+          {
+            "id": "identity-mismatch",
+            "kind": "signal",
+            "title": "Claimed identity could not be verified",
+            "detail": "The registrable domain is not listed for Lusitania Bank Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality."
+          },
+          {
+            "id": "lookalike",
+            "kind": "signal",
+            "title": "Domain similarity signal",
+            "detail": "This domain closely resembles lusitaniabank.test. Similarity is a warning signal, not proof of phishing."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "CRITICAL",
+        "rationale": [
+          "This address appears in the local fictional threat dataset.",
+          "The registrable domain is not listed for Lusitania Bank Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality.",
+          "This domain closely resembles lusitaniabank.test. Similarity is a warning signal, not proof of phishing.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "LEAVE_AND_BLOCK"
+      },
+      "rationale": "A known fictional phishing record combined with an identity mismatch is strong controlled evidence.",
+      "benign": false,
+      "expectedDanger": true
+    },
+    {
+      "id": "EVAL-007",
+      "name": "Known fictional malicious domain",
+      "family": "THREAT_REPUTATION",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://malicious-demo.test/download",
+        "claimedOrganisation": null,
+        "threatProviderState": "KNOWN_MALICIOUS",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "HIGH"
+        ],
+        "evidence": [
+          "known-threat",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "KNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "LEAVE"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "malicious-demo.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "KNOWN_MALICIOUS",
+        "identityState": "NO_CLAIM",
+        "risk": "HIGH",
+        "confidence": "HIGH",
+        "evidence": [
+          "known-threat",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "KNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": "LEAVE",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "known-threat",
+            "kind": "known",
+            "title": "Known malicious signal detected",
+            "detail": "This address appears in the local fictional threat dataset."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "HIGH",
+        "rationale": [
+          "This address appears in the local fictional threat dataset.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "LEAVE"
+      },
+      "rationale": "A known fictional malicious record independently requires a strong protective action.",
+      "benign": false,
+      "expectedDanger": true
+    },
+    {
+      "id": "EVAL-008",
+      "name": "No known reputation match",
+      "family": "THREAT_REPUTATION",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://no-record.test/",
+        "claimedOrganisation": null,
+        "threatProviderState": "NO_KNOWN_MATCH",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "LOW_EVIDENCE"
+        ],
+        "evidence": [
+          "no-match",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "PROCEED_WITH_CARE"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "no-record.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "NO_KNOWN_MATCH",
+        "identityState": "NO_CLAIM",
+        "risk": "LOW_EVIDENCE",
+        "confidence": "LIMITED",
+        "evidence": [
+          "no-match",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": "PROCEED_WITH_CARE",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "no-match",
+            "kind": "unknown",
+            "title": "No known threat found",
+            "detail": "No known threat was found in the sources checked. This is not proof that the website is safe."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "LOW_EVIDENCE",
+        "rationale": [
+          "No known threat was found in the sources checked. This is not proof that the website is safe.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "PROCEED_WITH_CARE"
+      },
+      "rationale": "No database match remains limited evidence and must not become a safe verdict.",
+      "benign": true,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-009",
+      "name": "Provider unavailable",
+      "family": "THREAT_REPUTATION",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://provider-check.test/",
+        "claimedOrganisation": null,
+        "threatProviderState": "PROVIDER_UNAVAILABLE",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "UNKNOWN"
+        ],
+        "evidence": [
+          "unknown-reputation",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "VERIFY_INDEPENDENTLY"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "provider-check.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "PROVIDER_UNAVAILABLE",
+        "identityState": "NO_CLAIM",
+        "risk": "UNKNOWN",
+        "confidence": "LIMITED",
+        "evidence": [
+          "unknown-reputation",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": "VERIFY_INDEPENDENTLY",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "unknown-reputation",
+            "kind": "unknown",
+            "title": "Reputation is unknown",
+            "detail": "The source checked cannot provide a positive or negative reputation result."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "UNKNOWN",
+        "rationale": [
+          "The source checked cannot provide a positive or negative reputation result.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "VERIFY_INDEPENDENTLY"
+      },
+      "rationale": "An unavailable provider cannot support either a positive or negative reputation conclusion.",
+      "benign": false,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-010",
+      "name": "Provider returns unknown",
+      "family": "THREAT_REPUTATION",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://unknown-new-domain.test/",
+        "claimedOrganisation": null,
+        "threatProviderState": "UNKNOWN",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "UNKNOWN"
+        ],
+        "evidence": [
+          "unknown-reputation",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "VERIFY_INDEPENDENTLY"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "unknown-new-domain.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "UNKNOWN",
+        "identityState": "NO_CLAIM",
+        "risk": "UNKNOWN",
+        "confidence": "LIMITED",
+        "evidence": [
+          "unknown-reputation",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": "VERIFY_INDEPENDENTLY",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "unknown-reputation",
+            "kind": "unknown",
+            "title": "Reputation is unknown",
+            "detail": "The source checked cannot provide a positive or negative reputation result."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "UNKNOWN",
+        "rationale": [
+          "The source checked cannot provide a positive or negative reputation result.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "VERIFY_INDEPENDENTLY"
+      },
+      "rationale": "Unknown reputation remains an explicit unknown state.",
+      "benign": false,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-011",
+      "name": "Exact verified demo domain claim",
+      "family": "IDENTITY",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://atlanticparcel.test/track",
+        "claimedOrganisation": "atlantic-parcel",
+        "threatProviderState": "NO_KNOWN_MATCH",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "LOW_EVIDENCE"
+        ],
+        "evidence": [
+          "no-match",
+          "identity-match",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "VERIFIED",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "PROCEED_WITH_CARE"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "atlanticparcel.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "NO_KNOWN_MATCH",
+        "identityState": "VERIFIED_MATCH",
+        "risk": "LOW_EVIDENCE",
+        "confidence": "MODERATE",
+        "evidence": [
+          "no-match",
+          "identity-match",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "VERIFIED",
+          "LIMITATION"
+        ],
+        "recommendedAction": "PROCEED_WITH_CARE",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "no-match",
+            "kind": "unknown",
+            "title": "No known threat found",
+            "detail": "No known threat was found in the sources checked. This is not proof that the website is safe."
+          },
+          {
+            "id": "identity-match",
+            "kind": "known",
+            "title": "Demo identity record matches",
+            "detail": "The registrable domain matches Atlantic Parcel Demo’s fictional demonstration record. This does not mean the website is safe."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "LOW_EVIDENCE",
+        "rationale": [
+          "No known threat was found in the sources checked. This is not proof that the website is safe.",
+          "The registrable domain matches Atlantic Parcel Demo’s fictional demonstration record. This does not mean the website is safe.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "PROCEED_WITH_CARE"
+      },
+      "rationale": "The controlled registry verifies only the domain-to-claim relationship.",
+      "benign": true,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-012",
+      "name": "Claimed organisation on unrelated domain",
+      "family": "IDENTITY",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://parcel-status.test/track",
+        "claimedOrganisation": "atlantic-parcel",
+        "threatProviderState": "NO_KNOWN_MATCH",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "CAUTION"
+        ],
+        "evidence": [
+          "no-match",
+          "identity-mismatch",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "SIGNAL",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "VERIFY_INDEPENDENTLY"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "parcel-status.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "NO_KNOWN_MATCH",
+        "identityState": "DOMAIN_MISMATCH",
+        "risk": "CAUTION",
+        "confidence": "MODERATE",
+        "evidence": [
+          "no-match",
+          "identity-mismatch",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "SIGNAL",
+          "LIMITATION"
+        ],
+        "recommendedAction": "VERIFY_INDEPENDENTLY",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "no-match",
+            "kind": "unknown",
+            "title": "No known threat found",
+            "detail": "No known threat was found in the sources checked. This is not proof that the website is safe."
+          },
+          {
+            "id": "identity-mismatch",
+            "kind": "signal",
+            "title": "Claimed identity could not be verified",
+            "detail": "The registrable domain is not listed for Atlantic Parcel Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "CAUTION",
+        "rationale": [
+          "No known threat was found in the sources checked. This is not proof that the website is safe.",
+          "The registrable domain is not listed for Atlantic Parcel Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "VERIFY_INDEPENDENTLY"
+      },
+      "rationale": "A domain mismatch is a warning signal, not proof of phishing.",
+      "benign": false,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-013",
+      "name": "Claimed organisation on lookalike domain",
+      "family": "IDENTITY",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://atlanticparcel-login.test/track",
+        "claimedOrganisation": "atlantic-parcel",
+        "threatProviderState": "NO_KNOWN_MATCH",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "CAUTION"
+        ],
+        "evidence": [
+          "no-match",
+          "identity-mismatch",
+          "lookalike",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "SIGNAL",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "VERIFY_INDEPENDENTLY"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "atlanticparcel-login.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "NO_KNOWN_MATCH",
+        "identityState": "DOMAIN_MISMATCH",
+        "risk": "CAUTION",
+        "confidence": "MODERATE",
+        "evidence": [
+          "no-match",
+          "identity-mismatch",
+          "lookalike",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "SIGNAL",
+          "LIMITATION"
+        ],
+        "recommendedAction": "VERIFY_INDEPENDENTLY",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "no-match",
+            "kind": "unknown",
+            "title": "No known threat found",
+            "detail": "No known threat was found in the sources checked. This is not proof that the website is safe."
+          },
+          {
+            "id": "identity-mismatch",
+            "kind": "signal",
+            "title": "Claimed identity could not be verified",
+            "detail": "The registrable domain is not listed for Atlantic Parcel Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality."
+          },
+          {
+            "id": "lookalike",
+            "kind": "signal",
+            "title": "Domain similarity signal",
+            "detail": "This domain closely resembles atlanticparcel.test. Similarity is a warning signal, not proof of phishing."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "CAUTION",
+        "rationale": [
+          "No known threat was found in the sources checked. This is not proof that the website is safe.",
+          "The registrable domain is not listed for Atlantic Parcel Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality.",
+          "This domain closely resembles atlanticparcel.test. Similarity is a warning signal, not proof of phishing.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "VERIFY_INDEPENDENTLY"
+      },
+      "rationale": "The mismatch and transparent similarity signal justify verification, not a confirmed-phishing claim.",
+      "benign": false,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-014",
+      "name": "No claimed organisation",
+      "family": "IDENTITY",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://independent-workshop.test/",
+        "claimedOrganisation": null,
+        "threatProviderState": "NO_KNOWN_MATCH",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "LOW_EVIDENCE"
+        ],
+        "evidence": [
+          "no-match",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "PROCEED_WITH_CARE"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "independent-workshop.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "NO_KNOWN_MATCH",
+        "identityState": "NO_CLAIM",
+        "risk": "LOW_EVIDENCE",
+        "confidence": "LIMITED",
+        "evidence": [
+          "no-match",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": "PROCEED_WITH_CARE",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "no-match",
+            "kind": "unknown",
+            "title": "No known threat found",
+            "detail": "No known threat was found in the sources checked. This is not proof that the website is safe."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "LOW_EVIDENCE",
+        "rationale": [
+          "No known threat was found in the sources checked. This is not proof that the website is safe.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "PROCEED_WITH_CARE"
+      },
+      "rationale": "With no claim, the engine does not invent an identity comparison.",
+      "benign": true,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-015",
+      "name": "One-character typo",
+      "family": "SIMILARITY",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://lusitaniabarnk.test/",
+        "claimedOrganisation": "lusitania-bank",
+        "threatProviderState": "KNOWN_MALICIOUS",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "CRITICAL"
+        ],
+        "evidence": [
+          "known-threat",
+          "identity-mismatch",
+          "lookalike",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "KNOWN",
+          "SIGNAL",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "LEAVE_AND_BLOCK"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "lusitaniabarnk.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "KNOWN_MALICIOUS",
+        "identityState": "DOMAIN_MISMATCH",
+        "risk": "CRITICAL",
+        "confidence": "HIGH",
+        "evidence": [
+          "known-threat",
+          "identity-mismatch",
+          "lookalike",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "KNOWN",
+          "SIGNAL",
+          "LIMITATION"
+        ],
+        "recommendedAction": "LEAVE_AND_BLOCK",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "known-threat",
+            "kind": "known",
+            "title": "Known malicious signal detected",
+            "detail": "This address appears in the local fictional threat dataset."
+          },
+          {
+            "id": "identity-mismatch",
+            "kind": "signal",
+            "title": "Claimed identity could not be verified",
+            "detail": "The registrable domain is not listed for Lusitania Bank Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality."
+          },
+          {
+            "id": "lookalike",
+            "kind": "signal",
+            "title": "Domain similarity signal",
+            "detail": "This domain closely resembles lusitaniabank.test. Similarity is a warning signal, not proof of phishing."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "CRITICAL",
+        "rationale": [
+          "This address appears in the local fictional threat dataset.",
+          "The registrable domain is not listed for Lusitania Bank Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality.",
+          "This domain closely resembles lusitaniabank.test. Similarity is a warning signal, not proof of phishing.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "LEAVE_AND_BLOCK"
+      },
+      "rationale": "The local malicious record and the separately reported typo similarity combine deterministically.",
+      "benign": false,
+      "expectedDanger": true
+    },
+    {
+      "id": "EVAL-016",
+      "name": "Added login word",
+      "family": "SIMILARITY",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://lusitaniabank-login.test/",
+        "claimedOrganisation": "lusitania-bank",
+        "threatProviderState": "NO_KNOWN_MATCH",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "CAUTION"
+        ],
+        "evidence": [
+          "no-match",
+          "identity-mismatch",
+          "lookalike",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "SIGNAL",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "VERIFY_INDEPENDENTLY"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "lusitaniabank-login.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "NO_KNOWN_MATCH",
+        "identityState": "DOMAIN_MISMATCH",
+        "risk": "CAUTION",
+        "confidence": "MODERATE",
+        "evidence": [
+          "no-match",
+          "identity-mismatch",
+          "lookalike",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "SIGNAL",
+          "LIMITATION"
+        ],
+        "recommendedAction": "VERIFY_INDEPENDENTLY",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "no-match",
+            "kind": "unknown",
+            "title": "No known threat found",
+            "detail": "No known threat was found in the sources checked. This is not proof that the website is safe."
+          },
+          {
+            "id": "identity-mismatch",
+            "kind": "signal",
+            "title": "Claimed identity could not be verified",
+            "detail": "The registrable domain is not listed for Lusitania Bank Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality."
+          },
+          {
+            "id": "lookalike",
+            "kind": "signal",
+            "title": "Domain similarity signal",
+            "detail": "This domain closely resembles lusitaniabank.test. Similarity is a warning signal, not proof of phishing."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "CAUTION",
+        "rationale": [
+          "No known threat was found in the sources checked. This is not proof that the website is safe.",
+          "The registrable domain is not listed for Lusitania Bank Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality.",
+          "This domain closely resembles lusitaniabank.test. Similarity is a warning signal, not proof of phishing.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "VERIFY_INDEPENDENTLY"
+      },
+      "rationale": "An added word creates a similarity signal but does not independently prove phishing.",
+      "benign": false,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-017",
+      "name": "Punycode similarity signal",
+      "family": "SIMILARITY",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://xn--80ak6aa92e.test/",
+        "claimedOrganisation": "lusitania-bank",
+        "threatProviderState": "NO_KNOWN_MATCH",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "CAUTION"
+        ],
+        "evidence": [
+          "no-match",
+          "identity-mismatch",
+          "lookalike",
+          "punycode",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "SIGNAL",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "VERIFY_INDEPENDENTLY"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "xn--80ak6aa92e.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": true,
+        "threatState": "NO_KNOWN_MATCH",
+        "identityState": "DOMAIN_MISMATCH",
+        "risk": "CAUTION",
+        "confidence": "MODERATE",
+        "evidence": [
+          "no-match",
+          "identity-mismatch",
+          "lookalike",
+          "punycode",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "SIGNAL",
+          "LIMITATION"
+        ],
+        "recommendedAction": "VERIFY_INDEPENDENTLY",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "no-match",
+            "kind": "unknown",
+            "title": "No known threat found",
+            "detail": "No known threat was found in the sources checked. This is not proof that the website is safe."
+          },
+          {
+            "id": "identity-mismatch",
+            "kind": "signal",
+            "title": "Claimed identity could not be verified",
+            "detail": "The registrable domain is not listed for Lusitania Bank Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality."
+          },
+          {
+            "id": "lookalike",
+            "kind": "signal",
+            "title": "Domain similarity signal",
+            "detail": "This domain closely resembles lusitaniabank.test. Similarity is a warning signal, not proof of phishing."
+          },
+          {
+            "id": "punycode",
+            "kind": "signal",
+            "title": "Encoded internationalised domain",
+            "detail": "The hostname contains punycode. It may be legitimate, but visually confusing characters deserve extra care."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "CAUTION",
+        "rationale": [
+          "No known threat was found in the sources checked. This is not proof that the website is safe.",
+          "The registrable domain is not listed for Lusitania Bank Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality.",
+          "This domain closely resembles lusitaniabank.test. Similarity is a warning signal, not proof of phishing.",
+          "The hostname contains punycode. It may be legitimate, but visually confusing characters deserve extra care.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "VERIFY_INDEPENDENTLY"
+      },
+      "rationale": "Encoded internationalised domains receive a transparent caution signal without a criminality claim.",
+      "benign": false,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-018",
+      "name": "Benign partial-word similarity",
+      "family": "SIMILARITY",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://atlantic-community.test/news",
+        "claimedOrganisation": null,
+        "threatProviderState": "NO_KNOWN_MATCH",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "LOW_EVIDENCE"
+        ],
+        "evidence": [
+          "no-match",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "PROCEED_WITH_CARE"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "atlantic-community.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "NO_KNOWN_MATCH",
+        "identityState": "NO_CLAIM",
+        "risk": "LOW_EVIDENCE",
+        "confidence": "LIMITED",
+        "evidence": [
+          "no-match",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": "PROCEED_WITH_CARE",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "no-match",
+            "kind": "unknown",
+            "title": "No known threat found",
+            "detail": "No known threat was found in the sources checked. This is not proof that the website is safe."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "LOW_EVIDENCE",
+        "rationale": [
+          "No known threat was found in the sources checked. This is not proof that the website is safe.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "PROCEED_WITH_CARE"
+      },
+      "rationale": "A common partial word and no organisation claim should not create a similarity accusation.",
+      "benign": true,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-019",
+      "name": "Organisation name in misleading subdomain",
+      "family": "MISLEADING_SUBDOMAIN",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://lusitaniabank.test.attacker-demo.test/login",
+        "claimedOrganisation": "lusitania-bank",
+        "threatProviderState": "NO_KNOWN_MATCH",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "CAUTION"
+        ],
+        "evidence": [
+          "no-match",
+          "identity-mismatch",
+          "misleading-subdomain",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "SIGNAL",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "VERIFY_INDEPENDENTLY"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "attacker-demo.test",
+        "subdomain": "lusitaniabank.test",
+        "https": true,
+        "punycode": false,
+        "threatState": "NO_KNOWN_MATCH",
+        "identityState": "DOMAIN_MISMATCH",
+        "risk": "CAUTION",
+        "confidence": "MODERATE",
+        "evidence": [
+          "no-match",
+          "identity-mismatch",
+          "misleading-subdomain",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "SIGNAL",
+          "LIMITATION"
+        ],
+        "recommendedAction": "VERIFY_INDEPENDENTLY",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "no-match",
+            "kind": "unknown",
+            "title": "No known threat found",
+            "detail": "No known threat was found in the sources checked. This is not proof that the website is safe."
+          },
+          {
+            "id": "identity-mismatch",
+            "kind": "signal",
+            "title": "Claimed identity could not be verified",
+            "detail": "The registrable domain is not listed for Lusitania Bank Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality."
+          },
+          {
+            "id": "misleading-subdomain",
+            "kind": "signal",
+            "title": "Misleading subdomain signal",
+            "detail": "The organisation’s demo domain appears on the left, but attacker-demo.test is the domain controlling this address in the current implementation."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "CAUTION",
+        "rationale": [
+          "No known threat was found in the sources checked. This is not proof that the website is safe.",
+          "The registrable domain is not listed for Lusitania Bank Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality.",
+          "The organisation’s demo domain appears on the left, but attacker-demo.test is the domain controlling this address in the current implementation.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "VERIFY_INDEPENDENTLY"
+      },
+      "rationale": "The registrable domain is attacker-demo.test; organisation-like text on the left does not establish ownership.",
+      "benign": false,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-020",
+      "name": "Nested benign subdomains",
+      "family": "MISLEADING_SUBDOMAIN",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://portal.help.community-library.test/information",
+        "claimedOrganisation": null,
+        "threatProviderState": "NO_KNOWN_MATCH",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "LOW_EVIDENCE"
+        ],
+        "evidence": [
+          "no-match",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "PROCEED_WITH_CARE"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "community-library.test",
+        "subdomain": "portal.help",
+        "https": true,
+        "punycode": false,
+        "threatState": "NO_KNOWN_MATCH",
+        "identityState": "NO_CLAIM",
+        "risk": "LOW_EVIDENCE",
+        "confidence": "LIMITED",
+        "evidence": [
+          "no-match",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": "PROCEED_WITH_CARE",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "no-match",
+            "kind": "unknown",
+            "title": "No known threat found",
+            "detail": "No known threat was found in the sources checked. This is not proof that the website is safe."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "LOW_EVIDENCE",
+        "rationale": [
+          "No known threat was found in the sources checked. This is not proof that the website is safe.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "PROCEED_WITH_CARE"
+      },
+      "rationale": "Nested subdomains are parsed without automatically creating a threat signal.",
+      "benign": true,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-021",
+      "name": "Unknown site requesting credentials",
+      "family": "SENSITIVE_CONTEXT",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://unknown-new-domain.test/login",
+        "claimedOrganisation": null,
+        "threatProviderState": "UNKNOWN",
+        "sensitiveInteraction": "password"
+      },
+      "expected": {
+        "risk": [
+          "CAUTION"
+        ],
+        "evidence": [
+          "unknown-reputation",
+          "sensitive",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "CONTEXT",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "VERIFY_INDEPENDENTLY"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "unknown-new-domain.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "UNKNOWN",
+        "identityState": "NO_CLAIM",
+        "risk": "CAUTION",
+        "confidence": "LIMITED",
+        "evidence": [
+          "unknown-reputation",
+          "sensitive",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "CONTEXT",
+          "LIMITATION"
+        ],
+        "recommendedAction": "VERIFY_INDEPENDENTLY",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "unknown-reputation",
+            "kind": "unknown",
+            "title": "Reputation is unknown",
+            "detail": "The source checked cannot provide a positive or negative reputation result."
+          },
+          {
+            "id": "sensitive",
+            "kind": "signal",
+            "title": "Sensitive password request",
+            "detail": "This controlled page asks for sensitive information. No value is collected or stored."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "CAUTION",
+        "rationale": [
+          "The source checked cannot provide a positive or negative reputation result.",
+          "This controlled page asks for sensitive information. No value is collected or stored.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "VERIFY_INDEPENDENTLY"
+      },
+      "rationale": "A credential request increases caution when reputation and identity cannot establish trust.",
+      "benign": false,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-022",
+      "name": "Verified demo site requesting credentials",
+      "family": "SENSITIVE_CONTEXT",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://lusitaniabank.test/account",
+        "claimedOrganisation": "lusitania-bank",
+        "threatProviderState": "NO_KNOWN_MATCH",
+        "sensitiveInteraction": "password"
+      },
+      "expected": {
+        "risk": [
+          "CAUTION"
+        ],
+        "evidence": [
+          "no-match",
+          "identity-match",
+          "sensitive",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "VERIFIED",
+          "CONTEXT",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "VERIFY_INDEPENDENTLY"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "lusitaniabank.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "NO_KNOWN_MATCH",
+        "identityState": "VERIFIED_MATCH",
+        "risk": "CAUTION",
+        "confidence": "MODERATE",
+        "evidence": [
+          "no-match",
+          "identity-match",
+          "sensitive",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "VERIFIED",
+          "CONTEXT",
+          "LIMITATION"
+        ],
+        "recommendedAction": "VERIFY_INDEPENDENTLY",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "no-match",
+            "kind": "unknown",
+            "title": "No known threat found",
+            "detail": "No known threat was found in the sources checked. This is not proof that the website is safe."
+          },
+          {
+            "id": "identity-match",
+            "kind": "known",
+            "title": "Demo identity record matches",
+            "detail": "The registrable domain matches Lusitania Bank Demo’s fictional demonstration record. This does not mean the website is safe."
+          },
+          {
+            "id": "sensitive",
+            "kind": "signal",
+            "title": "Sensitive password request",
+            "detail": "This controlled page asks for sensitive information. No value is collected or stored."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "CAUTION",
+        "rationale": [
+          "No known threat was found in the sources checked. This is not proof that the website is safe.",
+          "The registrable domain matches Lusitania Bank Demo’s fictional demonstration record. This does not mean the website is safe.",
+          "This controlled page asks for sensitive information. No value is collected or stored.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "VERIFY_INDEPENDENTLY"
+      },
+      "rationale": "Identity alignment does not remove the need for care before entering credentials.",
+      "benign": true,
+      "expectedDanger": false
+    },
+    {
+      "id": "EVAL-023",
+      "name": "Mismatched identity requesting credentials",
+      "family": "SENSITIVE_CONTEXT",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://account-assistance.test/login",
+        "claimedOrganisation": "lusitania-bank",
+        "threatProviderState": "NO_KNOWN_MATCH",
+        "sensitiveInteraction": "password"
+      },
+      "expected": {
+        "risk": [
+          "HIGH"
+        ],
+        "evidence": [
+          "no-match",
+          "identity-mismatch",
+          "sensitive",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "SIGNAL",
+          "CONTEXT",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "LEAVE"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "account-assistance.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "NO_KNOWN_MATCH",
+        "identityState": "DOMAIN_MISMATCH",
+        "risk": "HIGH",
+        "confidence": "MODERATE",
+        "evidence": [
+          "no-match",
+          "identity-mismatch",
+          "sensitive",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "SIGNAL",
+          "CONTEXT",
+          "LIMITATION"
+        ],
+        "recommendedAction": "LEAVE",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "no-match",
+            "kind": "unknown",
+            "title": "No known threat found",
+            "detail": "No known threat was found in the sources checked. This is not proof that the website is safe."
+          },
+          {
+            "id": "identity-mismatch",
+            "kind": "signal",
+            "title": "Claimed identity could not be verified",
+            "detail": "The registrable domain is not listed for Lusitania Bank Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality."
+          },
+          {
+            "id": "sensitive",
+            "kind": "signal",
+            "title": "Sensitive password request",
+            "detail": "This controlled page asks for sensitive information. No value is collected or stored."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "HIGH",
+        "rationale": [
+          "No known threat was found in the sources checked. This is not proof that the website is safe.",
+          "The registrable domain is not listed for Lusitania Bank Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality.",
+          "This controlled page asks for sensitive information. No value is collected or stored.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "LEAVE"
+      },
+      "rationale": "A sensitive request plus an identity mismatch deterministically raises the risk level.",
+      "benign": false,
+      "expectedDanger": true
+    },
+    {
+      "id": "EVAL-024",
+      "name": "Known phishing site requesting credentials",
+      "family": "SENSITIVE_CONTEXT",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://lusitania-bank-login.test/secure",
+        "claimedOrganisation": "lusitania-bank",
+        "threatProviderState": "KNOWN_PHISHING",
+        "sensitiveInteraction": "password"
+      },
+      "expected": {
+        "risk": [
+          "CRITICAL"
+        ],
+        "evidence": [
+          "known-threat",
+          "identity-mismatch",
+          "lookalike",
+          "sensitive",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "KNOWN",
+          "SIGNAL",
+          "CONTEXT",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "LEAVE_AND_BLOCK"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "lusitania-bank-login.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "KNOWN_PHISHING",
+        "identityState": "DOMAIN_MISMATCH",
+        "risk": "CRITICAL",
+        "confidence": "HIGH",
+        "evidence": [
+          "known-threat",
+          "identity-mismatch",
+          "lookalike",
+          "sensitive",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "KNOWN",
+          "SIGNAL",
+          "CONTEXT",
+          "LIMITATION"
+        ],
+        "recommendedAction": "LEAVE_AND_BLOCK",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "known-threat",
+            "kind": "known",
+            "title": "Known phishing signal detected",
+            "detail": "This address appears in the local fictional threat dataset."
+          },
+          {
+            "id": "identity-mismatch",
+            "kind": "signal",
+            "title": "Claimed identity could not be verified",
+            "detail": "The registrable domain is not listed for Lusitania Bank Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality."
+          },
+          {
+            "id": "lookalike",
+            "kind": "signal",
+            "title": "Domain similarity signal",
+            "detail": "This domain closely resembles lusitaniabank.test. Similarity is a warning signal, not proof of phishing."
+          },
+          {
+            "id": "sensitive",
+            "kind": "signal",
+            "title": "Sensitive password request",
+            "detail": "This controlled page asks for sensitive information. No value is collected or stored."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "CRITICAL",
+        "rationale": [
+          "This address appears in the local fictional threat dataset.",
+          "The registrable domain is not listed for Lusitania Bank Demo in this controlled demonstration. A mismatch is a risk signal, not proof of criminality.",
+          "This domain closely resembles lusitaniabank.test. Similarity is a warning signal, not proof of phishing.",
+          "This controlled page asks for sensitive information. No value is collected or stored.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "LEAVE_AND_BLOCK"
+      },
+      "rationale": "Known fictional phishing, mismatch, similarity and credential context provide multiple strong controlled signals.",
+      "benign": false,
+      "expectedDanger": true
+    },
+    {
+      "id": "EVAL-025",
+      "name": "Benign unknown site without sensitive request",
+      "family": "SENSITIVE_CONTEXT",
+      "passed": true,
+      "checks": {
+        "providerState": true,
+        "risk": true,
+        "evidence": true,
+        "action": true,
+        "prohibitedClaims": true,
+        "limitations": true
+      },
+      "input": {
+        "url": "https://unknown-new-domain.test/about",
+        "claimedOrganisation": null,
+        "threatProviderState": "UNKNOWN",
+        "sensitiveInteraction": null
+      },
+      "expected": {
+        "risk": [
+          "UNKNOWN"
+        ],
+        "evidence": [
+          "unknown-reputation",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": [
+          "VERIFY_INDEPENDENTLY"
+        ],
+        "prohibitedOutput": [
+          "positive safety claim",
+          "confirmed phishing from similarity alone",
+          "illegal website",
+          "you have been hacked",
+          "system-wide blocking",
+          "live provider claim"
+        ]
+      },
+      "actual": {
+        "registrableDomain": "unknown-new-domain.test",
+        "subdomain": "",
+        "https": true,
+        "punycode": false,
+        "threatState": "UNKNOWN",
+        "identityState": "NO_CLAIM",
+        "risk": "UNKNOWN",
+        "confidence": "LIMITED",
+        "evidence": [
+          "unknown-reputation",
+          "https-limit"
+        ],
+        "evidenceCategories": [
+          "UNKNOWN",
+          "LIMITATION"
+        ],
+        "recommendedAction": "VERIFY_INDEPENDENTLY",
+        "limitations": [
+          "Signals can produce false positives or false negatives.",
+          "This prototype does not inspect site content or prove who operates a domain.",
+          "An identity match does not guarantee that every action on a website is safe.",
+          "Production-grade registrable-domain handling requires a complete, maintained Public Suffix List implementation or equivalent trusted library."
+        ],
+        "claimViolations": []
+      },
+      "reasoningTrace": {
+        "signals": [
+          {
+            "id": "unknown-reputation",
+            "kind": "unknown",
+            "title": "Reputation is unknown",
+            "detail": "The source checked cannot provide a positive or negative reputation result."
+          },
+          {
+            "id": "https-limit",
+            "kind": "limitation",
+            "title": "HTTPS is not identity proof",
+            "detail": "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+          }
+        ],
+        "decision": "UNKNOWN",
+        "rationale": [
+          "The source checked cannot provide a positive or negative reputation result.",
+          "HTTPS protects the connection but does not prove the identity or trustworthiness of the website."
+        ],
+        "recommendation": "VERIFY_INDEPENDENTLY"
+      },
+      "rationale": "The engine preserves uncertainty without escalating an unfamiliar site to high risk.",
+      "benign": true,
+      "expectedDanger": false
+    }
+  ],
+  "claimDiscipline": {
+    "passed": true,
+    "checks": [
+      {
+        "name": "NO_KNOWN_MATCH is not labelled safe",
+        "passed": true
+      },
+      {
+        "name": "HTTPS alone does not verify identity",
+        "passed": true
+      },
+      {
+        "name": "Identity match alone remains limited evidence",
+        "passed": true
+      },
+      {
+        "name": "Similarity alone is not confirmed phishing",
+        "passed": true
+      },
+      {
+        "name": "No illegal-site claim",
+        "passed": true
+      },
+      {
+        "name": "No hacked-user claim",
+        "passed": true
+      },
+      {
+        "name": "No system-wide blocking claim",
+        "passed": true
+      },
+      {
+        "name": "No live-provider claim",
+        "passed": true
+      }
+    ]
+  },
+  "blockVerify": {
+    "passed": true,
+    "checks": [
+      {
+        "name": "initially unblocked",
+        "passed": true,
+        "actual": false
+      },
+      {
+        "name": "block is stored",
+        "passed": true,
+        "actual": true
+      },
+      {
+        "name": "recheck observes block",
+        "passed": true,
+        "actual": true
+      },
+      {
+        "name": "duplicate block remains single entry",
+        "passed": true,
+        "actual": 1
+      },
+      {
+        "name": "trust/block conflict behavior recorded",
+        "passed": true,
+        "actual": "independent lists permit both states"
+      },
+      {
+        "name": "remove clears block",
+        "passed": true,
+        "actual": false
+      },
+      {
+        "name": "post-removal recheck is unblocked",
+        "passed": true,
+        "actual": false
+      }
+    ],
+    "warning": "Block and trust are independent lists; the same domain can currently appear in both. This is a documented design limitation, not a silent failure."
+  },
+  "languageConsistency": {
+    "passed": true,
+    "pairChecks": [
+      {
+        "key": "sensitiveTitle",
+        "passed": true,
+        "english": "Pause before entering sensitive information.",
+        "portuguese": "Pare antes de introduzir informação sensível."
+      },
+      {
+        "key": "block",
+        "passed": true,
+        "english": "Block in this prototype",
+        "portuguese": "Bloquear neste protótipo"
+      },
+      {
+        "key": "leave",
+        "passed": true,
+        "english": "Leave this check",
+        "portuguese": "Sair desta verificação"
+      },
+      {
+        "key": "protection",
+        "passed": true,
+        "english": "Protection updated.",
+        "portuguese": "Proteção atualizada."
+      },
+      {
+        "key": "blockedInPrototype",
+        "passed": true,
+        "english": "Blocked in this prototype:",
+        "portuguese": "Bloqueado neste protótipo:"
+      },
+      {
+        "key": "removed",
+        "passed": true,
+        "english": "Removed from the local block list:",
+        "portuguese": "Removido da lista de bloqueio local:"
+      },
+      {
+        "key": "limits",
+        "passed": true,
+        "english": "What this check does not know",
+        "portuguese": "O que esta verificação não sabe"
+      },
+      {
+        "key": "checked",
+        "passed": true,
+        "english": "Checked with local demonstration data",
+        "portuguese": "Verificado com dados de demonstração locais"
+      },
+      {
+        "key": "currentlyBlocked",
+        "passed": true,
+        "english": "is currently blocked inside this prototype.",
+        "portuguese": "está atualmente bloqueado neste protótipo."
+      },
+      {
+        "key": "invalid",
+        "passed": true,
+        "english": "Enter a valid HTTP or HTTPS website address.",
+        "portuguese": "Introduza um endereço HTTP ou HTTPS válido."
+      }
+    ],
+    "evidenceChecks": [
+      {
+        "phrase": "Risco crítico",
+        "passed": true
+      },
+      {
+        "phrase": "PHISHING CONHECIDO",
+        "passed": true
+      },
+      {
+        "phrase": "Reputação desconhecida",
+        "passed": true
+      },
+      {
+        "phrase": "Não foi possível verificar a identidade alegada",
+        "passed": true
+      },
+      {
+        "phrase": "Saia e bloqueie este domínio no protótipo",
+        "passed": true
+      },
+      {
+        "phrase": "HTTPS não prova identidade ou confiança",
+        "passed": true
+      }
+    ],
+    "meaningReview": "Human-reviewed for equivalent security direction; literal word-for-word translation was not required."
+  },
+  "warnings": [
+    {
+      "classification": "DESIGN_LIMITATION",
+      "severity": "LOW",
+      "teacherDemoBlocking": false,
+      "description": "Block and trust are independent lists; the same domain can currently appear in both. This is a documented design limitation, not a silent failure."
+    }
+  ],
+  "preExecutionCorrections": [
+    {
+      "classification": "TEST_EXPECTATION_ERROR",
+      "file": "evaluation/scenarios.ts",
+      "description": "The initial synthetic punycode fixture was not a valid URL and was replaced with the repository's existing validated fictional punycode fixture before scenario execution.",
+      "productBehaviorChanged": false
+    },
+    {
+      "classification": "IMPLEMENTATION_DEFECT",
+      "file": "evaluation/evaluation-runner.ts",
+      "description": "The language-presence check compared disjoint TypeScript literal unions. The redundant inequality comparison was removed while preserving the non-empty pair check.",
+      "productBehaviorChanged": false
+    }
+  ],
+  "corrections": []
+}
